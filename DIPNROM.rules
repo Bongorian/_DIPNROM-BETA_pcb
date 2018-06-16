@@ -1,0 +1,100 @@
+
+(rules PCB DIPNROM
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 965)
+    (layer_rule Top
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.8)
+    )
+    (layer_rule Bottom
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 1.6)
+    )
+  )
+  (rule
+    (width 250.0)
+    (clear 200.2)
+    (clear 125.0 (type smd_to_turn_gap))
+    (clear 50.0 (type smd_smd))
+  )
+  (padstack "Via[0-1]_600:400_um"
+    (shape
+      (circle Top 600.0 0.0 0.0)
+    )
+    (shape
+      (circle Bottom 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_600:400_um" "Via[0-1]_600:400_um" default
+  )
+  (via 
+    "Via[0-1]_600:400_um-kicad_default" "Via[0-1]_600:400_um" "kicad_default"
+  )
+  (via 
+    "Via[0-1]_600:400_um-POWER" "Via[0-1]_600:400_um" POWER
+  )
+  (via_rule
+    default "Via[0-1]_600:400_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_600:400_um-kicad_default"
+  )
+  (via_rule
+    POWER "Via[0-1]_600:400_um-POWER"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer Top Bottom)
+    )
+  )
+  (class "kicad_default"
+    A12 A7 A6 A5 A4 A3 A2 A1
+    A0 D0 D1 D2 D3 D4 D5 D6
+    D7 A10 ROMSEL A11 A9 A8 A13 A14
+    PA12 PA7 PA6 PA5 PA4 PA3 PA2 PA1
+    PA0 PD0 PD1 PD2 PD3 PD4 PD5 PD6
+    PD7 PA13 PA10 RD PA11 PA9 PA8 "Net-(IC2-Pad26)"
+    "Net-(IC2-Pad27)" F2 WE RW IRQ /PA13 IN VRAMA10
+    "Net-(JP1-Pad1)" "Net-(JP2-Pad1)" "Net-(U1-Pad15)"
+    (clearance_class "kicad_default")
+    (via_rule kicad_default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer Top Bottom)
+    )
+  )
+  (class POWER
+    VCC GND
+    (clearance_class POWER)
+    (via_rule POWER)
+    (rule
+      (width 500.0)
+    )
+    (circuit 
+      (use_layer Top Bottom)
+    )
+  )
+)
